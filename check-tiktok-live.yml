@@ -1,0 +1,39 @@
+name: Check TikTok Live Status
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check-live:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install TikTokLive
+        run: pip install TikTokLive
+
+      - name: Check live status and update status.json
+        run: python check_live.py
+
+      - name: Commit status.json if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet -- status.json; then
+            git add status.json
+            git commit -m "Auto-update live status"
+            git push
+          else
+            echo "No status change, nothing to commit."
+          fi
