@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OnyxJuggernaut | Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#07050c;
+  --panel:#120b1e;
+  --panel2:#1a1028;
+  --text:#fff;
+  --muted:#b8aec8;
+  --purple:#a855f7;
+  --cyan:#22d3ee;
+  --gold:#fbbf24;
+  --line:rgba(168,85,247,.28);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  font-family:Inter,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 15% 0,rgba(168,85,247,.2),transparent 30%),
+    radial-gradient(circle at 88% 25%,rgba(34,211,238,.09),transparent 28%),
+    var(--bg);
+  min-height:100vh;
+  font-size:18px;
+  line-height:1.7;
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden;
+}
+a{color:var(--purple)}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:#e9d5ff;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.eyebrow:before{content:"";width:34px;height:2px;background:linear-gradient(90deg,var(--purple),var(--cyan))}
+
+h1,h2,h3{font-family:Orbitron,sans-serif;text-transform:uppercase}
+.gradient{background:linear-gradient(90deg,#fff 8%,#d8b4fe 48%,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- HEADER (desktop) ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  height:96px;
+  padding:0 clamp(20px,5vw,64px);
+  border-bottom:1px solid var(--line);
+  background:rgba(7,5,12,.86);
+  backdrop-filter:blur(18px);
+}
+.site-header .brand{display:flex;align-items:center;text-decoration:none}
+.site-header .brand img{height:64px;width:auto;display:block;filter:drop-shadow(0 0 10px rgba(168,85,247,.3))}
+
+.header-nav{display:flex;align-items:center;gap:30px}
+.header-nav a{font-family:Orbitron,sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:8px 2px;border-bottom:2px solid transparent;transition:.2s}
+.header-nav a:hover{color:#fff}
+.header-nav a.active{color:#fff;border-bottom-color:var(--purple)}
+
+.header-right{display:flex;align-items:center;gap:14px}
+.social-row{display:flex;gap:10px}
+.social-icon{width:42px;height:42px;display:grid;place-items:center;color:#fff;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.05);transition:.2s}
+.social-icon:hover{transform:translateY(-2px);border-color:var(--purple);box-shadow:0 0 24px rgba(168,85,247,.35)}
+.social-icon svg{width:20px;height:20px}
+
+.live-badge{display:flex;align-items:center;justify-content:center;gap:9px;padding:11px 16px;border-radius:12px;text-decoration:none;color:#ddd;background:#19151f;border:1px solid rgba(255,255,255,.1);font-family:Orbitron,sans-serif;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:#888}
+.live-badge.is-live{color:#fff;background:rgba(34,197,94,.15);border-color:#22c55e}
+.live-badge.is-live .dot{background:#22c55e;box-shadow:0 0 12px #22c55e}
+
+/* Hamburger button — hidden on desktop */
+.hamburger-btn{
+  display:none;
+  width:44px;height:44px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(255,255,255,.05);
+  cursor:pointer;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+.hamburger-btn span{display:block;width:20px;height:2px;background:#fff;transition:.25s;border-radius:2px}
+body.menu-open .hamburger-btn span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+body.menu-open .hamburger-btn span:nth-child(2){opacity:0}
+body.menu-open .hamburger-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile slide/fade overlay menu */
+#mobile-menu{
+  position:fixed;inset:0;z-index:90;
+  background:rgba(7,5,12,.98);
+  backdrop-filter:blur(14px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s ease;
+}
+#mobile-menu .mobile-menu-logo{height:54px;width:auto;margin-bottom:-16px;filter:drop-shadow(0 0 12px rgba(168,85,247,.35))}
+body.menu-open #mobile-menu{opacity:1;pointer-events:auto}
+#mobile-menu nav{display:flex;flex-direction:column;align-items:center;gap:22px}
+#mobile-menu nav a{font-family:Orbitron,sans-serif;font-weight:700;font-size:20px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+#mobile-menu nav a.active{color:#fff}
+#mobile-menu .social-row{gap:16px}
+#mobile-menu .social-icon{width:52px;height:52px}
+#mobile-menu .social-icon svg{width:24px;height:24px}
+
+@media(min-width:901px){
+  #mobile-menu{display:none !important}
+}
+@media(max-width:900px){
+  .site-header .header-nav,.site-header .header-right{display:none}
+  .hamburger-btn{display:flex}
+  .site-header{height:66px}
+  .site-header .brand img{height:40px}
+}
+
+/* ---------- MAIN ---------- */
+main{flex:1;min-width:0}
+
+.page-hero{max-width:1180px;margin:0 auto;padding:48px 24px 40px;overflow-wrap:break-word}
+.home-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.home-hero-logo{height:min(46vh,400px);width:auto;display:block;justify-self:center;filter:drop-shadow(0 0 30px rgba(168,85,247,.35))}
+@media(max-width:900px){
+  .home-hero-grid{grid-template-columns:1fr}
+  .home-hero-logo{height:min(32vh,220px);margin:8px auto 0;justify-self:stretch}
+}
+.page-hero h1{font-size:clamp(22px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;overflow-wrap:break-word}
+.page-hero .sub{margin-top:24px;max-width:680px;color:var(--muted);font-size:clamp(17px,1.6vw,20px)}
+.page-hero .sub strong{color:#fff}
+
+section.content{max-width:1180px;margin:0 auto;padding:20px 24px 40px}
+.section-head{margin-bottom:36px}
+.section-head h2{font-size:clamp(28px,4vw,42px)}
+.section-head p{max-width:640px;color:var(--muted);margin-top:12px;font-size:17px;line-height:1.65}
+
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 12px 34px rgba(0,0,0,.22)}
+
+/* Schedule page */
+.schedule-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){
+  .schedule-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .day-card{padding:16px 10px}
+  .day-card .day{font-size:12px;margin-bottom:8px}
+  .day-card .time{font-size:16px}
+}
+.day-card{text-align:center;padding:16px 14px}
+.day-card .day{font-family:Orbitron;font-size:13px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.day-card .time{font-family:Orbitron;font-size:17px;color:#fff}
+.day-card.fixed{border-color:var(--purple)}
+.day-card.fixed .time{background:linear-gradient(90deg,#fff,#d8b4fe);-webkit-background-clip:text;background-clip:text;color:transparent}
+.day-card.spontaneous{border-style:dashed}
+.day-card.spontaneous .time{color:var(--gold);font-size:15px;letter-spacing:.03em}
+
+/* Shop page */
+.shop-intro{max-width:700px;margin-bottom:44px}
+.shop-intro p{color:var(--muted);font-size:19px}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.product-grid{grid-template-columns:1fr}}
+.product-card{overflow:hidden;padding:0}
+.product-card .thumb{height:120px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(168,85,247,.18),rgba(34,211,238,.1));border-bottom:1px solid var(--line)}
+.product-card .thumb svg{width:40px;height:40px;color:var(--purple);opacity:.7}
+.product-card .info{padding:16px 18px}
+.product-card h3{font-size:15px;color:#fff;margin-bottom:6px}
+@media(max-width:900px){
+  .product-card{display:flex;flex-direction:row;align-items:center}
+  .product-card .thumb{height:auto;width:76px;flex-shrink:0;align-self:stretch;border-bottom:none;border-right:1px solid var(--line)}
+  .product-card .thumb svg{width:30px;height:30px}
+  .product-card .info{padding:14px 18px}
+  .product-card h3{margin-bottom:6px;font-size:15px}
+}
+.soon-pill{display:inline-block;font-family:Orbitron;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);padding:5px 10px;border-radius:999px}
+
+/* Contact page */
+.contact-wrap{max-width:560px}
+.contact-form{display:flex;flex-direction:column;gap:18px}
+.contact-form label{font-family:Orbitron;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block}
+.contact-form input,.contact-form textarea{
+  width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);color:#fff;font-family:Inter,sans-serif;font-size:16px;
+}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(168,85,247,.15)}
+.contact-form textarea{min-height:160px;resize:vertical}
+.contact-form button{
+  font-family:Orbitron,sans-serif;font-weight:700;font-size:14px;letter-spacing:.05em;text-transform:uppercase;
+  padding:16px 30px;border-radius:14px;color:#07050c;background:linear-gradient(90deg,var(--purple),var(--cyan));
+  border:none;cursor:pointer;transition:.2s;
+}
+.contact-form button:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(168,85,247,.35)}
+.contact-form .hp{position:absolute;left:-9999px}
+
+footer{margin-top:auto;text-align:center;border-top:1px solid var(--line);padding:18px 20px 22px;color:#81768f;font-size:13px}
+footer p+p{margin-top:4px}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <img src="emblem.png" alt="OnyxJuggernaut">
+  </a>
+  <nav class="header-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="schedule.html" class="">Stream Schedule</a>
+      <a href="events.html" class="">Special Events</a>
+      <a href="shop.html" class="">Shop</a>
+      <a href="contact.html" class="">Contact</a>
+  </nav>
+  <div class="header-right">
+    <div class="social-row">
+      <a class="social-icon" href="https://www.tiktok.com/@onyxjuggernaut?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-.7-.77-1.1-1.76-1.1-2.82h-3.1v13.36c0 1.56-1.27 2.83-2.83 2.83a2.83 2.83 0 0 1-2.83-2.83 2.83 2.83 0 0 1 2.83-2.83c.28 0 .55.04.8.12v-3.15c-.27-.04-.53-.06-.8-.06A5.94 5.94 0 0 0 3.64 16.4a5.94 5.94 0 0 0 5.93 5.94 5.94 5.94 0 0 0 5.93-5.94V9.02a7.9 7.9 0 0 0 4.6 1.47V7.4a4.85 4.85 0 0 1-3.5-1.58z"/></svg>
+        </a>
+        <a class="social-icon" href="https://discord.gg/GzUb8BF6wR" target="_blank" rel="noopener" aria-label="Discord">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 5.4A17.6 17.6 0 0 0 15.9 4a12.5 12.5 0 0 0-.6 1.2 16.3 16.3 0 0 0-4.8 0A12.5 12.5 0 0 0 9.9 4a17.5 17.5 0 0 0-4.4 1.4C2.9 8.8 2.2 12.1 2.5 15.3a17.7 17.7 0 0 0 5.4 2.7c.4-.6.8-1.2 1.1-1.9-.6-.2-1.2-.5-1.8-.9.2-.1.3-.3.5-.4a12.6 12.6 0 0 0 10.6 0c.2.1.3.3.5.4-.6.4-1.2.6-1.8.9.3.7.7 1.3 1.1 1.9a17.6 17.6 0 0 0 5.4-2.7c.4-3.7-.6-7-2.2-9.9zM9.7 13.5c-.8 0-1.4-.7-1.4-1.6 0-.9.6-1.6 1.4-1.6.8 0 1.4.7 1.4 1.6 0 .9-.6 1.6-1.4 1.6zm5.6 0c-.8 0-1.4-.7-1.4-1.6 0-.9.6-1.6 1.4-1.6.8 0 1.4.7 1.4 1.6 0 .9-.6 1.6-1.4 1.6z"/></svg>
+        </a>
+        <a class="social-icon" href="https://www.youtube.com/@onyxjuggernaut" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.4-.44-5.02a3 3 0 0 0-2.1-2.1C17.8 4.4 12 4.4 12 4.4s-5.8 0-7.46.48a3 3 0 0 0-2.1 2.1C2 8.6 2 12 2 12s0 3.4.44 5.02a3 3 0 0 0 2.1 2.1C6.2 19.6 12 19.6 12 19.6s5.8 0 7.46-.48a3 3 0 0 0 2.1-2.1C22 15.4 22 12 22 12Z"/><path d="M10 15.2 15.5 12 10 8.8v6.4Z" fill="#07050c"/></svg>
+        </a>
+    </div>
+    <a id="live-badge" class="live-badge" href="https://www.tiktok.com/@onyxjuggernaut" target="_blank" rel="noopener">
+      <span class="dot"></span>
+      <span id="live-badge-text">Offline</span>
+    </a>
+  </div>
+  <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div id="mobile-menu">
+  <img class="mobile-menu-logo" src="emblem.png" alt="OnyxJuggernaut">
+  <nav>
+    <a href="index.html" class="active">Home</a>
+        <a href="schedule.html" class="">Stream Schedule</a>
+        <a href="events.html" class="">Special Events</a>
+        <a href="shop.html" class="">Shop</a>
+        <a href="contact.html" class="">Contact</a>
+  </nav>
+  <div class="social-row">
+    <a class="social-icon" href="https://www.tiktok.com/@onyxjuggernaut?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-.7-.77-1.1-1.76-1.1-2.82h-3.1v13.36c0 1.56-1.27 2.83-2.83 2.83a2.83 2.83 0 0 1-2.83-2.83 2.83 2.83 0 0 1 2.83-2.83c.28 0 .55.04.8.12v-3.15c-.27-.04-.53-.06-.8-.06A5.94 5.94 0 0 0 3.64 16.4a5.94 5.94 0 0 0 5.93 5.94 5.94 5.94 0 0 0 5.93-5.94V9.02a7.9 7.9 0 0 0 4.6 1.47V7.4a4.85 4.85 0 0 1-3.5-1.58z"/></svg>
+        </a>
+        <a class="social-icon" href="https://discord.gg/GzUb8BF6wR" target="_blank" rel="noopener" aria-label="Discord">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 5.4A17.6 17.6 0 0 0 15.9 4a12.5 12.5 0 0 0-.6 1.2 16.3 16.3 0 0 0-4.8 0A12.5 12.5 0 0 0 9.9 4a17.5 17.5 0 0 0-4.4 1.4C2.9 8.8 2.2 12.1 2.5 15.3a17.7 17.7 0 0 0 5.4 2.7c.4-.6.8-1.2 1.1-1.9-.6-.2-1.2-.5-1.8-.9.2-.1.3-.3.5-.4a12.6 12.6 0 0 0 10.6 0c.2.1.3.3.5.4-.6.4-1.2.6-1.8.9.3.7.7 1.3 1.1 1.9a17.6 17.6 0 0 0 5.4-2.7c.4-3.7-.6-7-2.2-9.9zM9.7 13.5c-.8 0-1.4-.7-1.4-1.6 0-.9.6-1.6 1.4-1.6.8 0 1.4.7 1.4 1.6 0 .9-.6 1.6-1.4 1.6zm5.6 0c-.8 0-1.4-.7-1.4-1.6 0-.9.6-1.6 1.4-1.6.8 0 1.4.7 1.4 1.6 0 .9-.6 1.6-1.4 1.6z"/></svg>
+        </a>
+        <a class="social-icon" href="https://www.youtube.com/@onyxjuggernaut" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.4-.44-5.02a3 3 0 0 0-2.1-2.1C17.8 4.4 12 4.4 12 4.4s-5.8 0-7.46.48a3 3 0 0 0-2.1 2.1C2 8.6 2 12 2 12s0 3.4.44 5.02a3 3 0 0 0 2.1 2.1C6.2 19.6 12 19.6 12 19.6s5.8 0 7.46-.48a3 3 0 0 0 2.1-2.1C22 15.4 22 12 22 12Z"/><path d="M10 15.2 15.5 12 10 8.8v6.4Z" fill="#07050c"/></svg>
+        </a>
+  </div>
+  <a id="live-badge-mobile" class="live-badge" href="https://www.tiktok.com/@onyxjuggernaut" target="_blank" rel="noopener">
+    <span class="dot"></span>
+    <span id="live-badge-mobile-text">Offline</span>
+  </a>
+</div>
+
+<main>
+    <section class="page-hero">
+      <div class="home-hero-grid">
+        <div>
+          <span class="eyebrow">Content Creator &middot; Live Streamer</span>
+          <h1>I'm<br><span class="gradient">OnyxJuggernaut</span></h1>
+          <p class="sub">Welcome! I'm OnyxJuggernaut. I stream Fortnite daily on TikTok, with more live platforms coming soon!</p>
+          <p class="sub">What started as a solo journey has unexpectedly evolved into a community for those who appreciate Fortnite with the perfect balance of sweat and friendliness.</p>
+          <p class="sub">I invite you to join my Discord to be the first to know about special streams, events, and giveaways&mdash;or simply to share your cat pics.</p>
+          <p class="sub" style="margin-top:32px;color:#fff;font-style:italic;">And remember, always seek high ground in endgame.<br>&mdash; OnyxJuggernaut</p>
+        </div>
+        <img class="home-hero-logo" src="logo_hero.png" alt="OnyxJuggernaut">
+      </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; <span id="year"></span> OnyxJuggernaut</p>
+  </footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  if (hamburgerBtn) {
+    hamburgerBtn.addEventListener('click', () => {
+      document.body.classList.toggle('menu-open');
+    });
+  }
+  document.querySelectorAll('#mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  });
+
+  fetch('status.json?_=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      const ids = [['live-badge', 'live-badge-text'], ['live-badge-mobile', 'live-badge-mobile-text']];
+      ids.forEach(([badgeId, textId]) => {
+        const badge = document.getElementById(badgeId);
+        const text = document.getElementById(textId);
+        if (!badge) return;
+        if (data.live) {
+          badge.classList.add('is-live');
+          text.textContent = 'Live Now';
+        } else {
+          badge.classList.remove('is-live');
+          text.textContent = 'Offline';
+        }
+      });
+    })
+    .catch(() => { /* status.json missing or unreachable — badge stays at default "Offline" */ });
+</script>
+
+</body>
+</html>
